@@ -1,10 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { 
-  getFirestore, 
-  initializeFirestore, 
-  persistentLocalCache, 
-  persistentMultipleTabManager 
-} from "firebase/firestore";
+import { getAuth } from "firebase/auth"; // Add this
+import { initializeFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyATdALohmTrgNg7ZBEcZXchpFMaPpqPjc4",
@@ -16,9 +12,13 @@ const firebaseConfig = {
   measurementId: "G-FFPXQBN66K"
 };
 
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
 
-// THIS IS THE FIX: Initialize Firestore with Long Polling enabled
+// Initialize Auth
+export const auth = getAuth(app); // Export this for the login page
+
+// Initialize Firestore with the Long Polling fix
 export const db = initializeFirestore(app, {
   experimentalForceLongPolling: true, 
 });
